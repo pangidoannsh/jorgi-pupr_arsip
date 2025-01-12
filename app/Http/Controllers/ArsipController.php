@@ -12,7 +12,9 @@ class ArsipController extends Controller
      */
     public function index()
     {
-        //
+        $model = Arsip::all();
+        $title = "Arsip Dokumen";
+        return view("arsip.index", compact("model", "title"));
     }
 
     /**

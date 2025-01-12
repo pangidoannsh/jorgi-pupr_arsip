@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Working Colaboration Monitoring</title>
+    <title>Manajemen Arsip PUPR</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -39,13 +39,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>PUPR Arsip</h1>
-            {{-- <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </nav> --}}
+            <h1>{{ $title }}</h1>
         </div><!-- End Page Title -->
 
         @yield('content')

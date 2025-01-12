@@ -4,19 +4,19 @@
             'name' => 'Dashboard',
             'icon' => 'bi bi-house',
             'isActive' => Request::is('/'),
-            'route' => '/category',
+            'route' => '/',
         ],
         [
             'name' => 'Usulan',
             'icon' => 'bi bi-file-text',
             'isActive' => Request::is('usulan*'),
-            'route' => '/category',
+            'route' => '/usulan',
         ],
         [
             'name' => 'Arsip',
             'icon' => 'bi bi-archive',
             'isActive' => Request::is('arsip*'),
-            'route' => '/report',
+            'route' => '/arsip',
         ],
     ];
 @endphp
