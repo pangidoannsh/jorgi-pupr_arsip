@@ -1,21 +1,21 @@
 @php
     $menus = [
-        // [
-        //     'name' => 'Dashboard',
-        //     'icon' => 'bi bi-grid',
-        //     'isActive' => Request::is('/'),
-        //     'route' => '/',
-        // ],
         [
-            'name' => 'Kategori',
-            'icon' => 'bi bi-menu-button-wide',
-            'isActive' => Request::is('category*'),
+            'name' => 'Dashboard',
+            'icon' => 'bi bi-house',
+            'isActive' => Request::is('/'),
             'route' => '/category',
         ],
         [
-            'name' => 'Laporan',
-            'icon' => 'bi bi-journal-text',
-            'isActive' => Request::is('report*'),
+            'name' => 'Usulan',
+            'icon' => 'bi bi-file-text',
+            'isActive' => Request::is('usulan*'),
+            'route' => '/category',
+        ],
+        [
+            'name' => 'Arsip',
+            'icon' => 'bi bi-archive',
+            'isActive' => Request::is('arsip*'),
             'route' => '/report',
         ],
     ];
@@ -27,7 +27,7 @@
         @foreach ($menus as $menu)
             <li class="nav-item">
                 <a class="nav-link {{ !$menu['isActive'] ? 'collapsed' : '' }}" href="{{ $menu['route'] }}">
-                    <i class="{{ $menu['icon'] }}"></i>
+                    <i class="{{ $menu['icon'] }}{{ !$menu['isActive'] ? '' : '-fill' }}"></i>
                     <span>{{ $menu['name'] }}</span>
                 </a>
             </li>
