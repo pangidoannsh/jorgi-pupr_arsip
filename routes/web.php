@@ -12,5 +12,6 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index']);
 
-    Route::get("/arsip", [ArsipController::class, 'index'])->name("arsip");
+    Route::get('/datatable/arsip', [ArsipController::class, 'data'])->name('arsip.data');
+    Route::resource('arsip', ArsipController::class);
 });

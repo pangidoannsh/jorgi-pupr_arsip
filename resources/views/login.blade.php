@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/favicon.ico" rel="icon" type="image/png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -64,11 +63,11 @@
                                         method="POST">
                                         @csrf
                                         <div class="col-12">
-                                            <label for="username" class="form-label">NIP</label>
+                                            <label for="nip" class="form-label">NIP</label>
                                             <div class="input-group has-validation">
                                                 <input type="text" name="nip" value="{{ old('nip') }}"
-                                                    class="form-control" id="username" required>
-                                                <div class="invalid-feedback">Please enter your username.</div>
+                                                    class="form-control" id="nip" required>
+                                                <div class="invalid-feedback">Please enter your NIP.</div>
                                             </div>
                                         </div>
 

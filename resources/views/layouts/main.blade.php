@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('favicon.ico') }}" rel="icon" type="image/png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -30,16 +29,24 @@
     <link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href={{ asset('assets/css/style.css') }} rel="stylesheet">
+    <link href={{ asset('assets/css/app.css') }} rel="stylesheet">
 </head>
 
 <body>
     @include('partials.header')
     @include('partials.navbar')
+    @include('sweetalert::alert')
 
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>{{ $title }}</h1>
+            <div
+                class="position-relative d-flex {{ isset($isTitleCenter) && $isTitleCenter ? 'justify-content-center' : '' }}">
+                <div class="title-prefix">
+                    @stack('title-prefix')
+                </div>
+                <h1>{{ isset($title) ? $title : '' }}</h1>
+            </div>
         </div><!-- End Page Title -->
 
         @yield('content')
@@ -58,7 +65,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Template Main JS File -->
+    {{-- Datatable --}}
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    {{-- Sweetlalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src={{ asset('assets/js/main.js') }}></script>
     @stack('scripts')
 

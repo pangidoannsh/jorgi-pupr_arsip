@@ -1,0 +1,50 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+hr.divider {
+    border-width: 3px;
+}
+
+.card {
+    border: none;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #495057;
+}
+
+.row.mb-3 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.row.mb-3:last-child {
+    border-bottom: none;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.flex-1 {
+    flex-grow: 1;
+}
+
+.title-prefix {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.dt-input {
+    border-radius: 6px !important;
+}

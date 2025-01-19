@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('arsips', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("user_id");
+            $table->bigInteger("user_created");
             $table->string("kode_klasifikasi");
             $table->string("nomor_berkas");
             $table->string("nomor_arsip");
