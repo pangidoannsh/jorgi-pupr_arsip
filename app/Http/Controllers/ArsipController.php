@@ -55,28 +55,12 @@ class ArsipController extends Controller
             ->make(true);
     }
 
-    private function storeFile($file)
-    {
-        $extension = $file->getClientOriginalExtension();
-        $fileName = time() . '.' . $extension;
-        $file->move($this->upload_path, $fileName);
-        return $this->upload_path . $fileName;
-    }
-
-    private function deleteFile($file)
-    {
-        if ($file && File::exists(public_path($file))) {
-            File::delete(public_path($file));
-        }
-    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $model = Arsip::all();
-        $title = "Arsip Dokumen";
-        return view("arsip.index", compact("model", "title"));
+        return view("arsip.index", ["title" => "Arsip Dokumen"]);
     }
 
     /**
@@ -112,7 +96,7 @@ class ArsipController extends Controller
         $file = $request->file('file_upload');
 
         if ($file) {
-            $request->merge(['file' => $this->storeFile($file)]);
+            $request->merge(['file' => FileController::store($file, $this->upload_path)]);
         }
 
         $request->merge([
@@ -162,9 +146,9 @@ class ArsipController extends Controller
         $file = $request->file('file_upload');
         if ($file) {
             // Hapus file lama jika ada
-            $this->deleteFile($arsip->file);
+            FileController::delete($arsip->file);
             // Menyimpan file baru
-            $request->merge(['file' => $this->storeFile($file)]);
+            $request->merge(['file' => FileController::store($file, $this->upload_path)]);
         }
 
         $arsip->update($request->all());
@@ -178,7 +162,7 @@ class ArsipController extends Controller
      */
     public function destroy(Arsip $arsip)
     {
-        $this->deleteFile($arsip->file);
+        FileController::delete($arsip->file);
         $arsip->delete();
         Alert::success('Berhasil', 'Arsip berhasil dihapus');
         return redirect()->route("arsip.index");

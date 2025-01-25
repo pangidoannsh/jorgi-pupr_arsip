@@ -48,3 +48,7 @@ hr.divider {
 .dt-input {
     border-radius: 6px !important;
 }
+
+.form-select {
+    border-radius: 6px !important;
+}

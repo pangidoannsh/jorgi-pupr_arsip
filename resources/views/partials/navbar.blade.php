@@ -13,6 +13,13 @@
             'route' => '/usulan',
         ],
         [
+            'name' => 'Riwayat Usulan',
+            'icon' => 'bi bi-clock-history',
+            'iconNoFilled' => true,
+            'isActive' => Request::is('riwayat*'),
+            'route' => '/riwayat-usulan',
+        ],
+        [
             'name' => 'Arsip',
             'icon' => 'bi bi-archive',
             'isActive' => Request::is('arsip*'),
@@ -27,7 +34,8 @@
         @foreach ($menus as $menu)
             <li class="nav-item">
                 <a class="nav-link {{ !$menu['isActive'] ? 'collapsed' : '' }}" href="{{ $menu['route'] }}">
-                    <i class="{{ $menu['icon'] }}{{ !$menu['isActive'] ? '' : '-fill' }}"></i>
+                    <i
+                        class="{{ $menu['icon'] }}{{ !$menu['isActive'] ? '' : (isset($menu['iconNoFilled']) && $menu['iconNoFilled'] ? '' : '-fill') }}"></i>
                     <span>{{ $menu['name'] }}</span>
                 </a>
             </li>

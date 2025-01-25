@@ -6,11 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class SuratCuti extends Model
 {
-    protected $table = 'surat_cuti';
     protected $guarded = ['id'];
 
-    public function user()
+    public function getJenisUsulanAttribute()
     {
-        return $this->belongsTo(User::class);
+        return "Surat Cuti";
+    }
+
+
+    public function pengaju()
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
+
+    public function tembusan()
+    {
+        return $this->hasMany(TembusanSurat::class, "surat_id", "id");
     }
 }

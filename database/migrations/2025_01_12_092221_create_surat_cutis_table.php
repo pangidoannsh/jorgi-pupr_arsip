@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('surat_cutis', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("user_created");
             $table->bigInteger("user_id");
             $table->string("jenis_cuti");
             $table->integer("lama_cuti");
             $table->date("tanggal_mulai");
             $table->string("alasan_cuti");
-            $table->enum("status", ["menunggu", "ditolak", "disetujui_1", "disetujui"])->default("menunggu");
+            $table->enum("status", ["menunggu", "ditolak", "disetujui_admin", "disetujui"])->default("menunggu");
+            $table->string("lampiran")->nullable();
             $table->timestamps();
         });
     }

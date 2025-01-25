@@ -28,5 +28,20 @@ class UserSeeder extends Seeder
             "role" => "user",
             "password" => bcrypt("1")
         ]);
+        User::create([
+            "nip" => "dp123",
+            "unit_id" => "1",
+            "name" => "Dewangga",
+            "role" => "user",
+            "password" => bcrypt("1")
+        ]);
+
+        User::create([
+            "nip" => "kepala_dinas",
+            "unit_id" => "1",
+            "name" => "Kepala Dinas",
+            "role" => "kepala_dinas",
+            "password" => bcrypt("1")
+        ]);
     }
 }
