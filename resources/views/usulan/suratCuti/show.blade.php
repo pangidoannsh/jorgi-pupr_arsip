@@ -31,7 +31,7 @@
                         @endif
                         @if ($userRole === 'admin')
                             <a href="{{ route('suratCuti.print', $model->id) }}" class="btn btn-primary"
-                                style="width: max-content">
+                                style="width: max-content" target="_blank">
                                 <i class="bi bi-printer-fill"></i>
                                 Cetak
                             </a>

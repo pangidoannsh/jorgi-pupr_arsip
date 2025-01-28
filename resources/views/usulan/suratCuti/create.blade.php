@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@php
+    $userRole = Auth::user()->role;
+@endphp
 @push('title-prefix')
     <a href="{{ route('usulan.index') }}" class="btn btn-primary mb-3" style="width: max-content">Kembali</a>
 @endpush
@@ -12,15 +15,24 @@
                 <!-- User yang mengajukan -->
                 <div class="form-group">
                     <label for="user_id">Nama Pegawai yang Mengajukan<span class="text-danger">*</span></label>
+                    @if ($userRole === 'user')
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                    @endif
                     <select class="form-select @error('user_id') is-invalid @enderror" name="user_id" id="user_id"
-                        required {{ Auth::user()->role == 'user' ? 'disabled' : '' }}>
-                        @if (Auth::user()->role == 'admin')
+                        required {{ $userRole == 'user' ? 'disabled' : '' }}>
+                        @if ($userRole == 'admin')
                             <option selected disabled>Pilih Pegawai</option>
                         @endif
                         @foreach ($users as $user)
-                            <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                {{ $user->name }}
-                            </option>
+                            @if ($userRole === 'user')
+                                <option value="{{ $user->id }}" {{ Auth::user()->id == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                            @else
+                                <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                            @endif
                         @endforeach
                     </select>
                     @error('user_id')
@@ -37,7 +49,8 @@
                     <select class="form-select @error('jenis_cuti') is-invalid @enderror" name="jenis_cuti" id="jenis_cuti"
                         required>
                         <option selected disabled>Pilih Jenis Cuti</option>
-                        <option value="tahunan" {{ old('jenis_cuti') == 'tahunan' ? 'selected' : '' }}>Cuti Tahunan</option>
+                        <option value="tahunan" {{ old('jenis_cuti') == 'tahunan' ? 'selected' : '' }}>Cuti Tahunan
+                        </option>
                         <option value="sakit" {{ old('jenis_cuti') == 'sakit' ? 'selected' : '' }}>Cuti Sakit</option>
                         <option value="melahirkan" {{ old('jenis_cuti') == 'melahirkan' ? 'selected' : '' }}>Cuti
                             Melahirkan
@@ -61,13 +74,23 @@
                 </div>
 
                 <!-- Tanggal Mulai -->
-                <div class="form-group">
-                    <label for="tanggal_mulai">Tanggal Mulai<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror"
-                        id="tanggal_mulai" name="tanggal_mulai" value="{{ old('tanggal_mulai') }}" required>
-                    @error('tanggal_mulai')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row align-items-center">
+                    <div class="form-group col-6">
+                        <label for="tanggal_mulai">Tanggal Mulai<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror"
+                            id="tanggal_mulai" name="tanggal_mulai" value="{{ old('tanggal_mulai') }}" required>
+                        @error('tanggal_mulai')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="tanggal_selesai">Tanggal Selesai<span class="text-danger">*</span></label>
+                        <input type="date" class="form-control @error('tanggal_selesai') is-invalid @enderror"
+                            id="tanggal_selesai" name="tanggal_selesai" value="{{ old('tanggal_selesai') }}" required>
+                        @error('tanggal_selesai')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Alasan Cuti -->

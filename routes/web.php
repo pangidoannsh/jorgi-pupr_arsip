@@ -13,7 +13,7 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index']);
-
+    Route::get("/logout", [AuthController::class, "logout"])->name("logout");
     Route::get('/datatable/arsip', [ArsipController::class, 'data'])->name('arsip.data');
     Route::resource('arsip', ArsipController::class);
 
@@ -27,5 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('usulan/surat-cuti/{id}/tolak', [SuratCutiController::class, 'tolak'])->name('suratCuti.tolak');
     Route::get('usulan/surat-cuti/{id}/setujuiAdmin', [SuratCutiController::class, 'setujuiAdmin'])->name('suratCuti.setujuiAdmin');
     Route::get('usulan/surat-cuti/{id}/setujui', [SuratCutiController::class, 'setujui'])->name('suratCuti.setujui');
-    Route::get('usulan/surat-cuti/{id}/print', [SuratCutiController::class, 'print'])->name('suratCuti.print');
+
+    // PRINT
+    Route::get('surat-cuti/{id}/print', [SuratCutiController::class, 'print'])->name('suratCuti.print');
 });

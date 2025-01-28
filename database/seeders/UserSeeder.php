@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             "nip" => "admin123",
+            "jabatan" => "KEPALA SUB BAGIAN UMUM",
             "unit_id" => "1",
             "name" => "admin",
             "role" => "admin",
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
 
         User::create([
             "nip" => "ux123",
+            "jabatan" => "Test Jabatan",
             "unit_id" => "1",
             "name" => "Qosim",
             "role" => "user",
@@ -30,6 +32,7 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             "nip" => "dp123",
+            "jabatan" => "Test Jabatan",
             "unit_id" => "1",
             "name" => "Dewangga",
             "role" => "user",
@@ -38,8 +41,9 @@ class UserSeeder extends Seeder
 
         User::create([
             "nip" => "kepala_dinas",
+            "jabatan" => "Kepala Dinas",
             "unit_id" => "1",
-            "name" => "Kepala Dinas",
+            "name" => "Burhanudin",
             "role" => "kepala_dinas",
             "password" => bcrypt("1")
         ]);

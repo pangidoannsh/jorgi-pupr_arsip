@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("jenis_cuti");
             $table->integer("lama_cuti");
             $table->date("tanggal_mulai");
+            $table->date("tanggal_selesai");
             $table->string("alasan_cuti");
             $table->enum("status", ["menunggu", "ditolak", "disetujui_admin", "disetujui"])->default("menunggu");
             $table->string("lampiran")->nullable();

@@ -25,7 +25,7 @@ class UsulanController extends Controller
         if ($userRole == 'user') {
             $suratCuti->where("user_id", Auth::user()->id);
         }
-        $model = $model->merge($suratCuti->get());
+        $model = $model->merge($suratCuti->orderBy("created_at", "desc")->get());
         return view('usulan.index', ['title' => 'Usulan', 'model' => $model]);
     }
 
@@ -42,7 +42,7 @@ class UsulanController extends Controller
         if ($userRole == 'user') {
             $suratCuti->where("user_id", Auth::user()->id);
         }
-        $model = $model->merge($suratCuti->get());
+        $model = $model->merge($suratCuti->orderBy("created_at", "desc")->get());
         return view('usulan.riwayat', ['title' => 'Usulan', 'model' => $model]);
     }
 }

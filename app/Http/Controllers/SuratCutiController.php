@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SuratCuti;
 use App\Models\TembusanSurat;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,11 +19,8 @@ class SuratCutiController extends Controller
      */
     public function create()
     {
-        $users = User::select("id", "name");
-        if (Auth::user()->role == "user") {
-            $users->where("id", Auth::user()->id);
-        }
-        return view('usulan.suratCuti.create', ["title" => "Usulan Surat Cuti", "isTitleCenter" => true, "users" => $users->get()]);
+        $users = User::select("id", "name")->get();
+        return view('usulan.suratCuti.create', ["title" => "Usulan Surat Cuti", "isTitleCenter" => true, "users" => $users]);
     }
 
     /**
@@ -34,6 +32,7 @@ class SuratCutiController extends Controller
             'jenis_cuti' => 'required|string',
             'lama_cuti' => 'required|integer|min:1',
             'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'alasan_cuti' => 'required|string|max:500',
             'tembusan' => 'nullable|array',
             'tembusan.*' => 'exists:users,id',
@@ -41,18 +40,10 @@ class SuratCutiController extends Controller
             'lampiran_upload.required_without' => 'Lampiran harus diunggah jika URL file tidak diisi.',
             'url_file.required_without' => 'URL file harus diisi jika lampiran tidak diunggah.',
         ]);
-
         // Simpan file lampiran jika ada
         if ($request->hasFile('lampiran_upload')) {
             $request->merge(['lampiran' => FileController::store($request->file('lampiran_upload'), $this->upload_path)]);
         }
-
-        // Menambahkan user_id sebagai pengaju
-        $request->merge([
-            'user_id' => $request->user_id, // User yang mengajukan
-            'user_created' => Auth::user()->id, // User yang membuat data (Admin)
-            'status' => 'menunggu', // Default status
-        ]);
 
         // Simpan data surat cuti
         $suratCuti = SuratCuti::create($request->all());
@@ -129,5 +120,14 @@ class SuratCutiController extends Controller
         $suratCuti->update();
         Alert::success('Berhasil', 'Surat cuti telah disetujui.');
         return redirect()->back();
+    }
+
+    public function print($id)
+    {
+        $suratCuti = SuratCuti::findOrFail($id);
+        $pdf = Pdf::setOptions(['isHtml5ParserEnabled' => true])->setPaper('A4');
+        $kepalaDinas = User::where("role", "kepala_dinas")->select("name", "nip")->first();
+        $pdf->loadView('pdf.suratCuti', ["model" => $suratCuti, "perihal" => "Surat Permohonan Cuti", "kepalaDinas" => $kepalaDinas]);
+        return $pdf->stream('Surat Cuti.pdf');
     }
 }
