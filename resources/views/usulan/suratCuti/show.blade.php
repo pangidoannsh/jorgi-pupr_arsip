@@ -53,7 +53,15 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-4"><strong>Tanggal Mulai </strong></div>
-                    <div class="col-8">: {{ Carbon::parse($model->tanggal_mulai)->format('d F Y') }}</div>
+                    <div class="col-8">
+                        : {{ Carbon::parse($model->tanggal_mulai)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Tanggal Selesai </strong></div>
+                    <div class="col-8">
+                        : {{ Carbon::parse($model->tanggal_selesai)->locale('id_ID')->isoFormat('D MMMM Y') }}
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4"><strong>Alasan Cuti </strong></div>
