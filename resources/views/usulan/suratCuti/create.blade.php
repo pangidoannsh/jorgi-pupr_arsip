@@ -73,7 +73,7 @@
                     @enderror
                 </div>
 
-                <!-- Tanggal Mulai -->
+                <!-- Tanggal Mulai & Selesai -->
                 <div class="row align-items-center">
                     <div class="form-group col-6">
                         <label for="tanggal_mulai">Tanggal Mulai<span class="text-danger">*</span></label>

@@ -35,7 +35,7 @@
         {{ $model->lama_cuti }} hari, mulai dari
         {{ Carbon::parse($model->tanggal_mulai)->locale('id_ID')->isoFormat('D MMMM Y') }}
         sampai dengan
-        [tanggal selesai]. Permohonan izin ini
+        {{ Carbon::parse($model->tanggal_mulai)->locale('id_ID')->isoFormat('D MMMM Y') }}. Permohonan izin ini
         diajukan
         untuk {{ $model->alasan_cuti }}.
     </div>
