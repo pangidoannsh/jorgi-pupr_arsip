@@ -100,7 +100,7 @@ class ArsipController extends Controller
         }
 
         $request->merge([
-            'user_id' => Auth::user()->id,
+            'user_created' => Auth::user()->id,
         ]);
 
         Arsip::create($request->all());
