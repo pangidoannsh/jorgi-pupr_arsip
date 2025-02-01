@@ -97,10 +97,11 @@ class SuratCutiController extends Controller
         //
     }
 
-    public function tolak($id)
+    public function tolak($id, Request $request)
     {
         $suratCuti = SuratCuti::findOrFail($id);
         $suratCuti->status = "ditolak";
+        $suratCuti->alasan_ditolak = $request->alasan_ditolak;
         $suratCuti->update();
         Alert::success('Berhasil', 'Surat cuti telah ditolak.');
         return redirect()->back();

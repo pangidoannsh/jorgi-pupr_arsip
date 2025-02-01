@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date("tanggal_mulai");
             $table->date("tanggal_selesai");
             $table->string("alasan_cuti");
+            $table->string("alasan_ditolak")->nullable();
             $table->enum("status", ["menunggu", "ditolak", "disetujui_admin", "disetujui"])->default("menunggu");
             $table->string("lampiran")->nullable();
             $table->timestamps();

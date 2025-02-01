@@ -13,10 +13,10 @@
                         @if (
                             ($userRole === 'admin' && $model->status === 'menunggu') ||
                                 ($userRole === 'kepala_dinas' && $model->status === 'disetujui_admin'))
-                            <a href="{{ route('suratCuti.tolak', $model->id) }}" class="btn btn-outline-danger">
+                            <button id="btnTolak" data-id="{{ $model->id }}" class="btn btn-outline-danger">
                                 <i class="bi bi-x-lg"></i>
                                 Tolak
-                            </a>
+                            </button>
                         @endif
                         @if ($model->status === 'menunggu')
                             <a href="{{ route('suratCuti.setujuiAdmin', $model->id) }}" class="btn btn-success">
@@ -60,7 +60,16 @@
                     <div class="col-8">: {{ $model->alasan_cuti }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-4"><strong>Status </strong></div>
+                    <div class="col-4">
+                        <div>
+                            <strong>Status </strong>
+                        </div>
+                        @if ($model->status === 'ditolak')
+                            <div class="text-danger">
+                                <strong>Alasan Ditolak </strong>
+                            </div>
+                        @endif
+                    </div>
                     <div class="col-8">:
                         @if ($model->status === 'menunggu')
                             <span class="badge bg-warning">Menunggu</span>
@@ -70,6 +79,11 @@
                             <span class="badge bg-primary">Disetujui Admin</span>
                         @elseif ($model->status === 'disetujui')
                             <span class="badge bg-success">Cuti Disetujui</span>
+                        @endif
+                        @if ($model->status === 'ditolak')
+                            <div class="text-danger">
+                                <span class="text-black">:</span> {{ $model->alasan_ditolak }}
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -100,3 +114,34 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $("#btnTolak").click(function() {
+            let id = $(this).data("id");
+            Swal.fire({
+                title: 'Tolak Pengajuan Cuti',
+                text: "Masukkan alasan penolakan:",
+                input: 'textarea',
+                inputPlaceholder: "Tulis alasan penolakan di sini...",
+                inputAttributes: {
+                    'aria-label': 'Tulis alasan penolakan'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Tolak',
+                cancelButtonText: 'Batal',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Anda harus mengisi alasan penolakan!';
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let alasan = encodeURIComponent(result.value);
+                    window.location.href = `/usulan/surat-cuti/${id}/tolak?alasan_ditolak=${alasan}`;
+                }
+            });
+        });
+    </script>
+@endpush
