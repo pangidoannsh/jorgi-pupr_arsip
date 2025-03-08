@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('unit_id');
             $table->enum('role', ['user', 'admin', 'kepala_dinas'])->default("user");
             $table->string('jabatan');
+            $table->string('ttd')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -9,6 +9,11 @@ class Arsip extends Model
     protected $table = 'arsips';
     protected $guarded = ['id'];
 
+    public function getJenisUsulanAttribute()
+    {
+        return "Arsip";
+    }
+
     public function klasifikasi()
     {
         return $this->belongsTo(Klasifikasi::class, "kode_klasifikasi", "kode_klasifikasi");

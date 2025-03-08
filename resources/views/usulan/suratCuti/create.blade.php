@@ -63,16 +63,6 @@
                     @enderror
                 </div>
 
-                <!-- Lama Cuti -->
-                <div class="form-group">
-                    <label for="lama_cuti">Lama Cuti (Hari)<span class="text-danger">*</span></label>
-                    <input type="number" class="form-control @error('lama_cuti') is-invalid @enderror" id="lama_cuti"
-                        placeholder="Masukkan lama cuti" name="lama_cuti" value="{{ old('lama_cuti') }}" required>
-                    @error('lama_cuti')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
                 <!-- Tanggal Mulai & Selesai -->
                 <div class="row align-items-center">
                     <div class="form-group col-6">
@@ -102,7 +92,22 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
+                {{-- Diajukan Kepada --}}
+                <div class="form-group">
+                    <label for="diajukan_kepada">Diajukan Kepada<span class="text-danger">*</span></label>
+                    <select class="form-select @error('diajukan_kepada') is-invalid @enderror" name="diajukan_kepada"
+                        id="diajukan_kepada" required>
+                        <option selected disabled>Pilih Penerima Surat</option>
+                        @foreach ($jabatans as $jabatan)
+                            <option value="{{ $jabatan->id }}"
+                                {{ old('diajukan_kepada') == $jabatan->id ? 'selected' : '' }}>
+                                {{ $jabatan->user->name }} ({{ $jabatan->nama }})</option>
+                        @endforeach
+                    </select>
+                    @error('diajukan_kepada')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
                 <!-- Lampiran -->
                 <div class="form-group">
                     <label for="lampiran_upload">Lampiran</label>
@@ -124,7 +129,7 @@
                     <div id="tembusan-wrapper">
                         <div class="input-group mb-2">
                             <select class="form-select tembusan-select" name="tembusan[]">
-                                <option selected disabled>Pilih User</option>
+                                <option selected disabled>Pilih Tembusan</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach

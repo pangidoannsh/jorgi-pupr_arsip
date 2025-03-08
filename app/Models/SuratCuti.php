@@ -19,8 +19,18 @@ class SuratCuti extends Model
         return $this->belongsTo(User::class, "user_id", "id");
     }
 
+    public function ditujukan()
+    {
+        return $this->belongsTo(Jabatan::class, "diajukan_kepada", "id");
+    }
+
     public function tembusan()
     {
         return $this->hasMany(TembusanSurat::class, "surat_id", "id");
+    }
+
+    public function getLamaCutiAttribute()
+    {
+        return \Carbon\CarbonPeriod::create($this->tanggal_mulai, $this->tanggal_selesai)->count();
     }
 }

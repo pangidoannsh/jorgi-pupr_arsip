@@ -2,7 +2,17 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
+        <div class="card-body pt-3">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('usulan') ? 'active fw-bold' : '' }}" aria-current="page"
+                        href="{{ route('usulan.index') }}">Usulan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('riwayat-usulan') ? 'active fw-bold' : '' }}" aria-current="page"
+                        href="{{ route('usulan.riwayat') }}">Riwayat</a>
+                </li>
+            </ul>
             <!-- Table with hoverable rows -->
             <table class="table table-hover table-stripped mt-4" id="dataTable">
                 <thead class="table-primary">

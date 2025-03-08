@@ -7,7 +7,6 @@ use App\Models\Klasifikasi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -82,7 +81,7 @@ class ArsipController extends Controller
             'nomor_berkas' => 'required|string|max:255',
             'nomor_arsip' => 'required|string|max:255',
             'uraian_informasi' => 'required|string|max:500', // Disesuaikan dengan kebutuhan
-            'file_upload' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048|required_without:url_file', // Harus diisi jika url_file kosong
+            'file_upload' => 'nullable|file|max:2048|required_without:url_file', // Harus diisi jika url_file kosong
             'url_file' => 'nullable|required_without:file_upload', // Harus diisi jika file kosong
             'jumlah' => 'required|integer|min:1',
             'tingkat_perkembangan' => 'required|string|max:255',

@@ -13,11 +13,30 @@ class UnitKerjaSeeder extends Seeder
      */
     public function run(): void
     {
-        UnitKerja::Create([
-            "nama" => "Departemen Komunikasi dan Informatika"
-        ]);
-        UnitKerja::Create([
-            "nama" => "Departemen Sosial"
-        ]);
+        $unitKerja = [
+            "PUPR",
+            "Sub Bagian Keuangan, Perlengkapan, dan Pengelolaan Barang Milik Daerah",
+            "Subbagian Kepegawaian dan Umum",
+            "Bidang Sumber Daya Air",
+            "Bidang Bina Marga",
+            "Bidang Cipta Karya",
+            "Bidang Perumahan & Kawasan Permukiman",
+            "Bidang Pertanahan & Penataan Ruang",
+            "Bidang Bina Jasa Konstruksi",
+            "Seksi Sungai, Danau, dan Pantai",
+            "Seksi Irigasi dan Rawa",
+            "Seksi Pembangunan Jalan dan Jembatan",
+            "Seksi Preservasi Jalan dan Jembatan",
+            "Seksi Penataan Bangunan dan Lingkungan",
+            "Seksi Air Minum & Penyehatan Lingkungan",
+            "Seksi Pertanahan",
+            "Seksi Penataan Ruang",
+            "Seksi Pengaturan Jasa Konstruksi",
+            "Seksi Pemberdayaan & Pengawasan Jasa Konstruksi",
+        ];
+
+        foreach ($unitKerja as $nama) {
+            UnitKerja::create(["nama" => $nama]);
+        }
     }
 }

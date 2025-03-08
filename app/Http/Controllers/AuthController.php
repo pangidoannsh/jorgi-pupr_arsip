@@ -20,8 +20,8 @@ class AuthController extends Controller
             'nip' => ['required'],
             'password' => ['required'],
         ]);
-
-        if (Auth::attempt($credentials)) {
+        $remember = $request->has('remember');
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->intended();
         }

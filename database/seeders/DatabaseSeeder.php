@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SuratCutiSeeder::class,
             UnitKerjaSeeder::class,
             KlasifikasiSeeder::class,
+            JabatanSeeder::class,
         ]);
     }
 }

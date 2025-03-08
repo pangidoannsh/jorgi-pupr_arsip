@@ -51,12 +51,26 @@
                     <div>Hormat kami,</div>
                     <div>{{ $model->pengaju->name }}</div>
                     <div>{{ $model->pengaju->jabatan }}</div>
-                    <div style="height: 64px"></div>
-                    <div>{{ $kepalaDinas->name }}</div>
-                    <div>{{ $kepalaDinas->nip }}</div>
+                    <div style="height: 64px">
+                        <img src="{{ 'data:image/png;base64,' . base64_encode(file_get_contents(public_path($model->pengaju->ttd))) }}"
+                            style="height: 100%">
+                    </div>
+                    <div>{{ $model->pengaju->name }}</div>
+                    <div>{{ $model->pengaju->nip }}</div>
                 </div>
             </td>
         </tr>
     </table>
-    @include('pdf.tembusan')
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 100%">
+                @include('pdf.tembusan')
+            </td>
+            <td style="width: 100%">
+                <div style="float: right">
+                    <img src="data:img/png;base64, {!! $qrCode !!}">
+                </div>
+            </td>
+        </tr>
+    </table>
 @endsection

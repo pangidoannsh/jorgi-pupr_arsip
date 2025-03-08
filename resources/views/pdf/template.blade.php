@@ -29,9 +29,9 @@
     </table>
     <div style="font-weight: bold;margin-top: 24px;margin-bottom: 16px">
         Kepada Yth,<br>
-        [Bapak/Ibu]<br>
-        [Jabatan]<br>
-        di
+        {{ $model->ditujukan?->user?->name ?? '' }}<br>
+        {{ $model->ditujukan?->nama ?? '' }}<br>
+        di tempat
     </div>
     @yield('content')
 </body>

@@ -1,6 +1,7 @@
 @php
     use Carbon\Carbon;
     $userRole = Auth::user()->role;
+    // dd($model->ditujukan);
 @endphp
 @extends('layouts.main')
 @section('content')
@@ -29,7 +30,7 @@
                                 Setujui
                             </a>
                         @endif
-                        @if ($userRole === 'admin')
+                        @if ($userRole === 'admin' && ($model->status === 'disetujui_admin' || $model->status === 'disetujui'))
                             <a href="{{ route('suratCuti.print', $model->id) }}" class="btn btn-primary"
                                 style="width: max-content" target="_blank">
                                 <i class="bi bi-printer-fill"></i>
@@ -66,6 +67,10 @@
                 <div class="row mb-3">
                     <div class="col-4"><strong>Alasan Cuti </strong></div>
                     <div class="col-8">: {{ $model->alasan_cuti }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Diajukan Kepada</strong></div>
+                    <div class="col-8">: {{ $model->ditujukan?->user?->name }} ({{ $model->ditujukan?->nama }})</div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4">
