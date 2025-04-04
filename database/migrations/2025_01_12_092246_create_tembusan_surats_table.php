@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tembusan_surats', function (Blueprint $table) {
             $table->id();
-            $table->enum("jenis_surat", ["umum", "surat_cuti"])->default("umum");
+            $table->enum("jenis_surat", ["umum", "surat_cuti", "surat_pengantar"])->default("umum");
             $table->bigInteger("surat_id");
             $table->bigInteger("user_tembusan_id");
             $table->timestamps();

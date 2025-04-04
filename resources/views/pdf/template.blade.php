@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+@php
+    use Carbon\Carbon;
+@endphp
 
 <head>
     <title>Surat</title>
@@ -12,7 +15,8 @@
 
 <body>
     @include('pdf.kop')
-    <div style="text-align: right;margin-top:28px;padding-right:24px ">Pekanbaru, Oktober 2024</div>
+    <div style="text-align: right;margin-top:28px;padding-right:24px ">
+        Pekanbaru,{{ Carbon::now()->isoFormat('D MMMM Y') }}</div>
     <table>
         <tr>
             <td style="width: 90px">Nomor</td>

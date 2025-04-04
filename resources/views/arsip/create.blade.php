@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-6">
             <form action="{{ route('arsip.store') }}" method="POST" class="d-flex flex-column card p-4" style="gap:12px"
                 enctype="multipart/form-data">

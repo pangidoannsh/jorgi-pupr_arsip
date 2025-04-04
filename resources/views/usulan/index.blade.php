@@ -26,6 +26,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownUsulan">
                         <a class="dropdown-item" href="{{ route('suratCuti.create') }}">Surat Cuti</a>
+                        <a class="dropdown-item" href="{{ route('suratPengantar.create') }}">Surat Pengantar</a>
                         <a class="dropdown-item" href="#">Lainnya</a>
                     </div>
                 </div>
@@ -65,6 +66,26 @@
                                     <td>
                                         <div class="btn-group">
                                             <a href="{{ route('suratCuti.show', $item->id) }}" class="btn btn-sm btn-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                @case('Surat Pengantar')
+                                    <td>
+                                        Pengajuan Surat Pengantar
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <span>Keperluan: {{ $item->keperluan }}</span>
+                                            <span>Lokasi Kegiatan: {{ $item->lokasi_kegiatan }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ $item->pengaju?->name }}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{{ route('suratPengantar.show', $item->id) }}" class="btn btn-sm btn-primary">
                                                 <i class="bi bi-eye"></i>
                                             </a>
                                         </div>

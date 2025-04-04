@@ -7,9 +7,11 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SuratCutiController;
+use App\Http\Controllers\SuratPengantarController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsulanController;
+use App\Models\SuratPengantar;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,8 +50,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('usulan/surat-cuti/{id}/setujuiAdmin', [SuratCutiController::class, 'setujuiAdmin'])->name('suratCuti.setujuiAdmin');
     Route::get('usulan/surat-cuti/{id}/setujui', [SuratCutiController::class, 'setujui'])->name('suratCuti.setujui');
 
+    // Surat Pengantar
+    Route::get('usulan/surat-pengantar/create', [SuratPengantarController::class, 'create'])->name('suratPengantar.create');
+    Route::get('usulan/surat-pengantar/{id}', [SuratPengantarController::class, 'show'])->name('suratPengantar.show');
+    Route::post('usulan/surat-pengantar', [SuratPengantarController::class, 'store'])->name('suratPengantar.store');
+    Route::get('usulan/surat-pengantar/{id}/tolak', [SuratPengantarController::class, 'tolak'])->name('suratPengantar.tolak');
+    Route::get('usulan/surat-pengantar/{id}/setujuiAdmin', [SuratPengantarController::class, 'setujuiAdmin'])->name('suratPengantar.setujuiAdmin');
+    Route::get('usulan/surat-pengantar/{id}/setujui', [SuratPengantarController::class, 'setujui'])->name('suratPengantar.setujui');
+
     // PRINT
     Route::get('surat-cuti/{id}/print', [SuratCutiController::class, 'print'])->name('suratCuti.print');
+    Route::get('surat-pengantar/{id}/print', [SuratPengantarController::class, 'print'])->name('suratPengantar.print');
 
     //NOTIFIKASI
     Route::get("/notif", [NotificationController::class, "index"])->name("notif.index");
