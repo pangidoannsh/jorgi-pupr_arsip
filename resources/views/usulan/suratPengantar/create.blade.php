@@ -57,7 +57,7 @@
                 <div class="form-group">
                     <label for="lokasi_kegiatan">Lokasi Kegiatan<span class="text-danger">*</span></label>
                     <input type="text" class="form-control @error('lokasi_kegiatan') is-invalid @enderror"
-                        id="lokasi_kegiatan" placeholder="lokasi_kegiatan" name="lokasi_kegiatan"
+                        id="lokasi_kegiatan" placeholder="lokasi kegiatan" name="lokasi_kegiatan"
                         value="{{ old('lokasi_kegiatan') }}" required>
                     @error('lokasi_kegiatan')
                         <div class="invalid-feedback">{{ $message }}</div>

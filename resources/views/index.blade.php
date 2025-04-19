@@ -168,17 +168,19 @@
                                                 name: 'Surat Cuti'
                                             },
                                             {
-                                                value: 0,
-                                                name: 'Surat Dinas'
+                                                value: {{ $usulan->filter(function ($usulan) {
+                                                        return $usulan->jenis_usulan === 'Surat Pengantar';
+                                                    })->count() }},
+                                                name: 'Surat Pengantar'
                                             },
-                                            {
-                                                value: 0,
-                                                name: 'Surat ABC'
-                                            },
-                                            {
-                                                value: 0,
-                                                name: 'Surat Lainnya'
-                                            }
+                                            // {
+                                            //     value: 0,
+                                            //     name: 'Surat ABC'
+                                            // },
+                                            // {
+                                            //     value: 0,
+                                            //     name: 'Surat Lainnya'
+                                            // }
                                         ]
                                     }]
                                 });
