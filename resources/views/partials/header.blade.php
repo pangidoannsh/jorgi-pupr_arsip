@@ -92,17 +92,23 @@
                                     let notifItem = $(`
                                             <li class="dropdown-item d-flex align-items-center ${bgClass}" 
                                                 style="gap: 12px; padding: 8px; cursor: pointer;" 
-                                                onclick="window.location.href='/${notif.link}'"
                                             >
                                                 <div style="flex-grow: 1;">
-                                                    <a href="/${notif.link}" style="text-decoration: none; color: inherit;">
+                                                    <button type="button" class="btn btn-link p-0 text-start" style="text-decoration: none; color: inherit;">
                                                         <h6 class="mb-0" style="color:black">${notif.title}</h6>
                                                         <small class="text-muted">${notif.text}</small>
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </li>
                                         `);
+                                    notifItem.find('button').on('click', function(event) {
+                                        event.stopPropagation();
 
+                                        $.get(`/notif/${notif.id}/read`, function() {
+                                            window.location.href =
+                                                `/${notif.link}`;
+                                        });
+                                    });
                                     if (!notif.read) {
                                         let markReadButton = $(`<button class="btn btn-sm btn-outline-primary" 
                                             style="font-size: 10px; padding: 2px 4px; margin-left: auto;">
@@ -112,12 +118,12 @@
                                         // Tambahkan event click langsung ke elemen sebelum di-append
                                         markReadButton.on("click", function(event) {
                                             event
-                                                .stopPropagation(); // Hindari trigger klik ke <li>
+                                        .stopPropagation(); // Hindari trigger klik ke <li>
 
                                             $.get(`/notif/${notif.id}/read`,
                                                 function() {
                                                     fetchNotifications
-                                                        (); // Refresh daftar notifikasi
+                                                (); // Refresh daftar notifikasi
                                                 });
                                         });
 

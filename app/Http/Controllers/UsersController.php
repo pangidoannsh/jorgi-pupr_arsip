@@ -109,7 +109,7 @@ class UsersController extends Controller
             'jabatan' => 'required',
             'unit_id' => 'required',
             'role' => 'required',
-            'ttd_upload' => 'nullable|image|mimes:png|max:2048', // Tidak wajib
+            'ttd_upload' => 'nullable|image|mimes:png|max:2048',
         ]);
 
         $user = User::findOrFail($id); // Ambil data user berdasarkan ID

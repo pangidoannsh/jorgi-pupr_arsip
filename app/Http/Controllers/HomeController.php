@@ -19,7 +19,7 @@ class HomeController extends Controller
         // ====== Surat Cuti ======
         $suratCutiQuery = SuratCuti::select("status", "created_at", "approved_at")->whereDate('created_at', '>=', now()->subDays(7));
 
-        if ($user->role !== "admin") {
+        if ($user->role === "user") {
             $suratCutiQuery->where("user_id", $userId);
         }
 

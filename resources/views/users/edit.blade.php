@@ -18,9 +18,10 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-6">
-            <form action="{{ route('users.store') }}" method="POST" class="d-flex flex-column card p-4" style="gap:12px"
-                enctype="multipart/form-data">
+            <form action="{{ route('users.update', $model->id) }}" method="POST" class="d-flex flex-column card p-4"
+                style="gap:12px" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 {{-- NIP --}}
                 <div class="form-group">
                     <label for="nip">NIP<span class="text-danger">*</span></label>
@@ -96,22 +97,21 @@
                 </div>
 
                 {{-- TTD UPLOAD --}}
-                <div class="col-6 form-group">
-                    <div class="d-flex align-items-center">
-                        <label for="ttd_upload">Upload TTD</label>
+                <div class="col-12 form-group">
+                    <div class="d-flex align-items-center" style="gap: 12px">
+                        <label for="ttd_upload" style="width: max-content">Upload TTD</label>
                         @if ($model->ttd)
-                            <a href="{{ asset($model->ttd) }}" class="btn btn-primary btn-sm" target="_blank">
+                            <a href="{{ asset($model->ttd) }}" class="btn btn-primary btn-sm" style="width: max-content"
+                                target="_blank">
                                 Lihat TTD Sekarang
                             </a>
                         @endif
                     </div>
-                    <input type="file" class="form-control @error('ttd_upload') is-invalid @enderror" id="ttd_upload"
-                        name="ttd_upload">
+                    <input type="file" class="form-control @error('ttd_upload') is-invalid @enderror" name="ttd_upload">
                     @error('ttd_upload')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <button class="btn btn-primary mt-4">Simpan</button>
             </form>
 
