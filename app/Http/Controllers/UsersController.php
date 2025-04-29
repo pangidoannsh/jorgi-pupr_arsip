@@ -15,7 +15,7 @@ class UsersController extends Controller
 
     public function data(Request $request)
     {
-        $users = User::with(['unit']);
+        $users = User::with(['unit'])->latest();
         if ($request->get('role', "") != "") {
             $users->where('role', $request->role);
         }

@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td style="width: 90px">Jabatan</td>
-            <td>: {{ $model->pengaju->nip }}</td>
+            <td>: {{ $model->pengaju->jabatan }}</td>
         </tr>
         <tr>
             <td style="width: 90px">Unit Kerja</td>
